@@ -1,7 +1,7 @@
 export type Locale = 'en' | 'uk';
 export type Money = number;
 export type ISODate = string; // ISO 8601 format: YYYY-MM-DD
-export type Currency = 'USD' | 'EUR' | 'UAH';
+export type Currency = 'USD' | 'EUR' | 'UAH' | 'CZK';
 
 export interface Party {
     name: string;

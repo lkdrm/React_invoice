@@ -1,6 +1,12 @@
-function App() 
-{
-  return <h1>Invoice app!</h1>;
-}
+import { NewInvoicePage } from './pages/NewInvoicePage';
+import styles from './styles/App.module.css';
+
+export const App = () => {
+  return (
+    <div className={styles.app}>
+      <NewInvoicePage />
+    </div>
+  );
+};
 
 export default App;

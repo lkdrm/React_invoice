@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import type { LineItem } from './types';
 import {
-  formatMoney,
   lineTotal,
   lineVat,
   subTotal,
@@ -9,6 +8,7 @@ import {
   totalVat,
   vatBreakdown,
 } from './calculations';
+import { formatMoney } from '../domain/formatMoney';
 
 function buildItem(overrides: Partial<LineItem> = {}): LineItem {
   return {

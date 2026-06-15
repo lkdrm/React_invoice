@@ -1,0 +1,54 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.4rem 0.5rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #ececec;
+}
+
+.table th {
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #f6f6f6;
+}
+
+.table input,
+.table select {
+  width: 100%;
+  font: inherit;
+  padding: 0.35rem 0.4rem;
+  border: 1px solid #c8c8c8;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.lineTotal {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.addButton {
+  align-self: flex-start;
+  padding: 0.4rem 0.9rem;
+  font: inherit;
+  border: 1px solid #5b8ce5;
+  background: #5b8ce5;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.addButton:hover {
+  background: #4878d0;
+}

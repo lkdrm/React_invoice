@@ -29,8 +29,8 @@ export interface Invoice {
     currency: Currency;
     templateId: string;
     note?: string;
-    createAt: string; // ISO 8601 format: YYYY-MM-DDTHH:mm:ssZ
-    updateAt: string; // ISO 8601 format: YYYY-MM-DDTHH:mm:ssZ
+    createAt: number; // Unix timestamp
+    updateAt: number; // Unix timestamp
 }
 
 export interface Settings {

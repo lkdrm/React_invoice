@@ -1,4 +1,5 @@
 import type { Invoice, LineItem, Party } from "../domain/types";
+import { useTranslation } from '../il8n/useTranslation';
 import { subTotal, total, totalVat } from "../domain/calculations";
 import { formatMoney } from "../domain/formatMoney";
 import { PartyEditor } from "../components/PartyEditor";
@@ -15,6 +16,7 @@ export const InvoiceForm = ({ invoice, onChange }: InvoiceFormProps) => {
         onChange({ ...invoice, ...patch, updateAt: Date.now() });
     };
 
+    const { t, locale } = useTranslation();
     const handleSupplierChange = (party: Party) => update({ supplier: party });
     const handleCustomerChange = (party: Party) => update({ customer: party });
     const handleItemsChange = (items: LineItem[]) => update({ items });
@@ -26,14 +28,14 @@ export const InvoiceForm = ({ invoice, onChange }: InvoiceFormProps) => {
     return (
         <div className={styles.form}>
             <section className={styles.section}>
-                <h2>Invoice details</h2>
+                <h2>{t('nav.newInvoice')}</h2>
                 <div className={styles.grid}>
                     <label className={styles.field}>
-                        <span>Invoice number</span>
+                        <span>{t('invoice.number')}</span>
                         <input type="text" value={invoice.number} onChange={(event) => update({ number: event.target.value })} required placeholder="2026-001" />
                     </label>
                     <label className={styles.field}>
-                        <span>Currency</span>
+                        <span>{t('invoice.currency')}</span>
                         <select value={invoice.currency} onChange={(event) => update({ currency: event.target.value as Invoice['currency'] })}>
                             <option value="EUR">EUR</option>
                             <option value="CZK">CZK</option>
@@ -42,31 +44,31 @@ export const InvoiceForm = ({ invoice, onChange }: InvoiceFormProps) => {
                         </select>
                     </label>
                     <label className={styles.field}>
-                        <span>Issue date</span>
+                        <span>{t('invoice.issueDate')}</span>
                         <input type="date" value={invoice.issueDate} onChange={(event) => update({ issueDate: event.target.value })} required />
                     </label>
                     <label className={styles.field}>
-                        <span>Due date</span>
+                        <span>{t('invoice.dueDate')}</span>
                         <input type="date" value={invoice.dueDate} onChange={(event) => update({ dueDate: event.target.value })} required />
                     </label>
                 </div>
             </section>
 
             <section className={styles.section}>
-                <h2>Parties</h2>
+                <h2>{t('invoice.parties')}</h2>
                 <div className={styles.parties}>
-                    <PartyEditor label="Supplier" party={invoice.supplier} onChange={handleSupplierChange} />
-                    <PartyEditor label="Customer" party={invoice.customer} onChange={handleCustomerChange} />
+                    <PartyEditor label={t('invoice.supplier')} party={invoice.supplier} onChange={handleSupplierChange} />
+                    <PartyEditor label={t('invoice.customer')} party={invoice.customer} onChange={handleCustomerChange} />
                 </div>
             </section>
 
             <section className={styles.section}>
-                <h2>Line items</h2>
+                <h2>{t('invoice.items')}</h2>
                 <LineItemsEditor items={invoice.items} currency={invoice.currency} onChange={handleItemsChange} />
             </section>
 
             <section className={styles.section}>
-                <h2>Notes</h2>
+                <h2>{t('invoice.notes')}</h2>
                 <label className={styles.field}>
                     <span className={styles.visuallyHidden}>Notes</span>
                     <textarea value={invoice.note ?? ''} onChange={(event) => update({ note: event.target.value })} rows={3} placeholder="Additional notes or comments about the invoice" />
@@ -75,16 +77,16 @@ export const InvoiceForm = ({ invoice, onChange }: InvoiceFormProps) => {
 
             <aside className={styles.totals} aria-label="Invoice totals">
                 <div>
-                    <span>Subtotal:</span>
-                    <strong>{formatMoney(sub, invoice.currency, 'en')}</strong>
+                    <span>{t('invoice.totals.subtotal')}</span>
+                    <strong>{formatMoney(sub, invoice.currency, locale)}</strong>
                 </div>
                 <div>
-                    <span>VAT:</span>
-                    <strong>{formatMoney(vat, invoice.currency, 'en')}</strong>
+                    <span>{t('invoice.totals.vat')}</span>
+                    <strong>{formatMoney(vat, invoice.currency, locale)}</strong>
                 </div>
                 <div className={styles.grand}>
-                    <span>Total:</span>
-                    <strong>{formatMoney(grand, invoice.currency, 'en')}</strong>
+                    <span>{t('invoice.total')}</span>
+                    <strong>{formatMoney(grand, invoice.currency, locale)}</strong>
                 </div>
             </aside>
         </div>

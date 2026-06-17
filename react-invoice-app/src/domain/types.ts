@@ -1,4 +1,4 @@
-export type Locale = 'en' | 'uk';
+export type Locale = 'en' | 'ua' | 'cz';
 export type Money = number;
 export type ISODate = string; // ISO 8601 format: YYYY-MM-DD
 export type Currency = 'USD' | 'EUR' | 'UAH' | 'CZK';

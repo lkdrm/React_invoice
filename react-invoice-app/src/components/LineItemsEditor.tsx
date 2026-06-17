@@ -3,6 +3,7 @@ import { lineTotal } from '../domain/calculations';
 import { formatMoney } from '../domain/formatMoney';
 import { parseMoneyInput, formatMoneyInput } from '../domain/money';
 import { emptyLineItem } from '../domain/factory';
+import { useTranslation } from '../il8n/useTranslation';
 import styles from '../styles/LineItemsEditor.module.css';
 
 interface LineItemsEditorProps {
@@ -26,16 +27,17 @@ export const LineItemsEditor = ({ items, currency, onChange }: LineItemsEditorPr
         onChange(items.filter((item) => item.id !== id));
     };
 
+    const { t } = useTranslation();
+
     return (
         <div className={styles.editor}>
             <table className={styles.table}>
                 <thead>
                     <tr>
-                        <th>Description</th>
-                        <th>Quantity</th>
-                        <th>Unit price</th>
-                        <th>VAT %</th>
-                        <th>Line total</th>
+                        <th>{t('lineItem.description')}</th>
+                        <th>{t('lineItem.quantity')}</th>
+                        <th>{t('lineItem.unitPrice')}</th>
+                        <th>{t('lineItem.vatRate')}</th>
                         <th aria-label="Actions" />
                     </tr>
                 </thead>
@@ -67,7 +69,7 @@ export const LineItemsEditor = ({ items, currency, onChange }: LineItemsEditorPr
                             </td>
                             <td>
                                 <button type="button" onClick={() => removeItem(item.id)} disabled={items.length === 1} aria-label="Remove row">
-                                    Remove
+                                    {t('lineItem.remove')}
                                 </button>
                             </td>
                         </tr>
@@ -75,7 +77,7 @@ export const LineItemsEditor = ({ items, currency, onChange }: LineItemsEditorPr
                 </tbody>
             </table>
             <button type="button" className={styles.addButton} onClick={addItem}>
-                Add line
+                {t('lineItem.add')}
             </button>
         </div>
     );

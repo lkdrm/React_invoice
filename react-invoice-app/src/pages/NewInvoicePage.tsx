@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Invoice } from '../domain/types';
 import { emptyInvoice } from '../domain/factory';
 import { InvoiceForm } from '../components/InvoiceForm';
+import { LanguageSwitcher } from '../components/LanguageSwitcher';
+import { useTranslation } from '../il8n/useTranslation';
 
 export const NewInvoicePage = () => {
     const [invoice, setInvoice] = useState<Invoice>(() => emptyInvoice());
@@ -11,12 +13,17 @@ export const NewInvoicePage = () => {
         console.log('Submit invoice:', invoice);
     };
 
+    const { t } = useTranslation();
+
     return (
         <main>
-            <h1>New Invoice</h1>
+            <h1>{t('nav.newInvoice')}</h1>
             <form onSubmit={handleSubmit} noValidate={false}>
                 <InvoiceForm invoice={invoice} onChange={setInvoice} />
-                <button type="submit">Submit</button>
+                <button type="submit">{t('actions.save')}</button>
+                <div>
+                    <LanguageSwitcher />
+                </div>
             </form>
         </main>
     );

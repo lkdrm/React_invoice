@@ -15,6 +15,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
 export interface I18nContextValue {
     locale: Locale;
     setLocale: (locale: Locale) => void;
+    dictionary: Dictionary;
 }
 
 // Export the context itself

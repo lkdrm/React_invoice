@@ -6,6 +6,7 @@ import { subTotal, total, totalVat } from '../domain/calculations';
 import { formatMoney } from '../domain/formatMoney';
 import { PartyEditor } from './PartyEditor';
 import { LineItemsEditor } from './LineItemsEditor';
+import { SaveButton } from './SaveButton';
 import styles from '../styles/InvoiceForm.module.css';
 
 export function InvoiceForm() {
@@ -134,9 +135,9 @@ export function InvoiceForm() {
                 </div>
             </aside>
 
-            <button type="submit">
-                {t('actions.save')}
-            </button>
+            <div className={styles.actions}>
+                <SaveButton />
+            </div>
         </form>
     );
 }

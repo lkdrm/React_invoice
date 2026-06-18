@@ -15,6 +15,7 @@
   "invoice.totals.vat": "ПДВ:",
   "invoice.totals.total": "Разом:",
   "invoice.parties": "Сторони",
+  "invoice.total": "Сума",
   "party.name": "Назва",
   "party.address": "Адреса",
   "party.taxId": "ЄДРПОУ",

@@ -15,6 +15,7 @@
   "invoice.totals.vat": "VAT:",
   "invoice.totals.total": "Total:",
   "invoice.parties": "Parties",
+  "invoice.total": "Total",
   "party.name": "Name",
   "party.address": "Address",
   "party.taxId": "Tax ID",

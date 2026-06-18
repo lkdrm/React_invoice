@@ -1,34 +1,52 @@
-import type { Currency, LineItem } from '../domain/types';
+import type { LineItem } from '../domain/types';
+import { useInvoice } from '../state/InvoiceContext';
 import { lineTotal } from '../domain/calculations';
 import { formatMoney } from '../domain/formatMoney';
 import { parseMoneyInput, formatMoneyInput } from '../domain/money';
 import { emptyLineItem } from '../domain/factory';
-import { useTranslation } from '../il8n/useTranslation';
+import { useTranslation } from '../i18n/useTranslation';
 import styles from '../styles/LineItemsEditor.module.css';
-
-interface LineItemsEditorProps {
-    items: LineItem[];
-    currency: Currency;
-    onChange: (next: LineItem[]) => void;
-}
 
 const VAT_OPTIONS = [0, 10, 15, 21] as const;
 
-export const LineItemsEditor = ({ items, currency, onChange }: LineItemsEditorProps) => {
-    const updateItem = (id: string, patch: Partial<LineItem>) => {
-        onChange(items.map((item) => (item.id === id ? { ...item, ...patch } : item)));
+export function LineItemsEditor() {
+    const { invoice, dispatch } = useInvoice();
+    const { t, locale } = useTranslation();
+
+    const items = invoice.items;
+    const currency = invoice.currency;
+
+    const updateItems = (nextItems: LineItem[], updateAt: number) => {
+        dispatch({
+            type: 'patch-invoice',
+            patch: {
+                items: nextItems,
+                updateAt,
+            },
+        });
     };
 
-    const addItem = () => {
-        onChange([...items, emptyLineItem()]);
+    const updateItem = (
+        id: string,
+        patch: Partial<LineItem>,
+        updateAt: number
+    ) => {
+        updateItems(
+            items.map((item) => item.id === id ? { ...item, ...patch } : item),
+            updateAt
+        );
     };
 
-    const removeItem = (id: string) => {
-        onChange(items.filter((item) => item.id !== id));
+    const addItem = (updateAt: number) => {
+        updateItems([...items, emptyLineItem()], updateAt);
     };
 
-    const { t } = useTranslation();
-
+    const removeItem = (id: string, updateAt: number) => {
+        updateItems(
+            items.filter((item) => item.id !== id),
+            updateAt
+        );
+    };
     return (
         <div className={styles.editor}>
             <table className={styles.table}>
@@ -41,34 +59,89 @@ export const LineItemsEditor = ({ items, currency, onChange }: LineItemsEditorPr
                         <th aria-label="Actions" />
                     </tr>
                 </thead>
+
                 <tbody>
                     {items.map((item) => (
                         <tr key={item.id}>
                             <td>
-                                <input type="text" value={item.description} onChange={(event) => updateItem(item.id, { description: event.target.value })} required placeholder="Item description" />
+                                <input
+                                    type="text"
+                                    value={item.description}
+                                    onChange={(event) =>
+                                        updateItem(
+                                            item.id,
+                                            { description: event.target.value },
+                                            Date.now()
+                                        )
+                                    }
+                                    required
+                                    placeholder="Item description"
+                                />
                             </td>
+
                             <td>
-                                <input type="number" min={0} step="0.01" value={item.quantity} onChange={(event) => updateItem(item.id, { quantity: Number(event.target.value) })} required placeholder="Quantity" />
+                                <input
+                                    type="number"
+                                    min={0}
+                                    step="0.01"
+                                    value={item.quantity}
+                                    onChange={(event) =>
+                                        updateItem(
+                                            item.id,
+                                            { quantity: Number(event.target.value) },
+                                            Date.now()
+                                        )
+                                    }
+                                    required
+                                    placeholder="Quantity"
+                                />
                             </td>
+
                             <td>
-                                <input type="text" inputMode="decimal" value={formatMoneyInput(item.unitPrice)} onChange={(event) => updateItem(item.id, { unitPrice: parseMoneyInput(event.target.value) })} required placeholder="Unit price" />
+                                <input
+                                    type="text"
+                                    inputMode="decimal"
+                                    value={formatMoneyInput(item.unitPrice)}
+                                    onChange={(event) =>
+                                        updateItem(
+                                            item.id,
+                                            { unitPrice: parseMoneyInput(event.target.value) },
+                                            Date.now()
+                                        )
+                                    }
+                                    required
+                                    placeholder="Unit price"
+                                />
                             </td>
+
                             <td>
-                                <select value={item.vatRate} onChange={(event) => updateItem(item.id, { vatRate: Number(event.target.value) })}>
-                                    {
-                                        VAT_OPTIONS.map((rate) =>
-                                        (
-                                            <option
-                                                key={rate} value={rate}>{rate}
-                                            </option>
-                                        ))}
+                                <select
+                                    value={item.vatRate}
+                                    onChange={(event) =>
+                                        updateItem(
+                                            item.id,
+                                            { vatRate: Number(event.target.value) },
+                                            Date.now()
+                                        )
+                                    }>
+                                    {VAT_OPTIONS.map((rate) => (
+                                        <option key={rate} value={rate}>
+                                            {rate}
+                                        </option>
+                                    ))}
                                 </select>
                             </td>
+
                             <td className={styles.lineTotal}>
-                                {formatMoney(lineTotal(item), currency, 'en')}
+                                {formatMoney(lineTotal(item), currency, locale)}
                             </td>
+
                             <td>
-                                <button type="button" onClick={() => removeItem(item.id)} disabled={items.length === 1} aria-label="Remove row">
+                                <button
+                                    type="button"
+                                    onClick={() => removeItem(item.id, Date.now())}
+                                    disabled={items.length === 1}
+                                    aria-label="Remove row">
                                     {t('lineItem.remove')}
                                 </button>
                             </td>
@@ -76,9 +149,13 @@ export const LineItemsEditor = ({ items, currency, onChange }: LineItemsEditorPr
                     ))}
                 </tbody>
             </table>
-            <button type="button" className={styles.addButton} onClick={addItem}>
+
+            <button
+                type="button"
+                className={styles.addButton}
+                onClick={() => addItem(Date.now())}>
                 {t('lineItem.add')}
             </button>
         </div>
     );
-};
+}

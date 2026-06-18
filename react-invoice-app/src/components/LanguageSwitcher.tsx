@@ -1,4 +1,4 @@
-import { useTranslation } from "../il8n/useTranslation";
+import { useTranslation } from "../i18n/useTranslation";
 import type { Locale } from "../domain/types";
 
 const SUPPORTED_LOCALES: ReadonlyArray<{ code: Locale; label: string }> = [

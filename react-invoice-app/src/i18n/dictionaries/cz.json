@@ -15,6 +15,7 @@
   "invoice.totals.vat": "DPH:",
   "invoice.totals.total": "Celkem:",
   "invoice.parties": "Strany",
+  "invoice.total": "Celkem",
   "party.name": "Název",
   "party.address": "Adresa",
   "party.taxId": "IČO",

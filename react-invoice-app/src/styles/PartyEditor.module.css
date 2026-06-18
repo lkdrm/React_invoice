@@ -24,3 +24,22 @@
   border: 1px solid #c8c8c8;
   border-radius: 4px;
 }
+
+.party {
+  min-width: 0;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.field textarea {
+  resize: vertical;
+}

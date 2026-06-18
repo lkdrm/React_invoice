@@ -28,5 +28,6 @@
   "lineItem.remove": "Видалити",
   "actions.save": "Зберегти",
   "actions.cancel": "Скасувати",
-  "actions.languageSwitch": "Мова"
+  "actions.languageSwitch": "Мова",
+  "form.save": "Зберегти рахунок"
 }

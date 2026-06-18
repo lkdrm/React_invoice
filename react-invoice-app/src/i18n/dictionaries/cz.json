@@ -28,5 +28,6 @@
   "lineItem.remove": "Odstranit",
   "actions.save": "Uložit",
   "actions.cancel": "Zrušit",
-  "actions.languageSwitch": "Jazyk"
+  "actions.languageSwitch": "Jazyk",
+  "form.save": "Uložit účet"
 }

@@ -28,5 +28,6 @@
   "lineItem.remove": "Remove",
   "actions.save": "Save",
   "actions.cancel": "Cancel",
-  "actions.languageSwitch": "Language"
+  "actions.languageSwitch": "Language",
+  "form.save": "Save invoice"
 }

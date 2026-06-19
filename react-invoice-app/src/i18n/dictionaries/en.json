@@ -29,5 +29,6 @@
   "actions.save": "Save",
   "actions.cancel": "Cancel",
   "actions.languageSwitch": "Language",
-  "form.save": "Save invoice"
+  "form.save": "Save invoice",
+  "pdf.template": "Template"
 }

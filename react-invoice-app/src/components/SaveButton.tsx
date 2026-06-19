@@ -1,6 +1,7 @@
 import { useInvoice } from "../state/InvoiceContext";
 import { useTranslation } from "../i18n/useTranslation";
 import { invoiceRepo } from "../persistence/invoiceRepo";
+import styles from '../styles/SaveButton.module.css';
 
 export function SaveButton() {
     const { invoice, dispatch } = useInvoice();
@@ -13,7 +14,7 @@ export function SaveButton() {
     }
 
     return (
-        <button type="button" onClick={handleSave}>
+        <button type="button" className={styles.saveButton} onClick={handleSave}>
             {t('form.save')}
         </button>
     )

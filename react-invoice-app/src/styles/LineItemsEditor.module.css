@@ -11,16 +11,20 @@
 
 .table th,
 .table td {
-  text-align: left;
-  padding: 0.4rem 0.5rem;
+  padding: 0.75rem 0.5rem;
   vertical-align: middle;
-  border-bottom: 1px solid #ececec;
+  border-bottom: 1px solid #f1f5f9;
 }
 
 .table th {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  background: #f6f6f6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-label);
+  background: transparent;
+  border-bottom: 2px solid var(--card-border);
+  padding: 0.75rem 0.5rem;
 }
 
 .table input,
@@ -40,15 +44,79 @@
 
 .addButton {
   align-self: flex-start;
-  padding: 0.4rem 0.9rem;
-  font: inherit;
-  border: 1px solid #5b8ce5;
-  background: #5b8ce5;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  background: var(--accent);
   color: #fff;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(170, 59, 255, 0.2);
 }
 
 .addButton:hover {
-  background: #4878d0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(170, 59, 255, 0.3);
+  filter: brightness(1.1);
+}
+
+.removeButton {
+  background-color: transparent;
+  color: #ef4444;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.removeButton:hover {
+  background-color: #fef2f2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+
+.removeButton:focus-visible {
+  outline: 2px solid #fca5a5;
+  outline-offset: 2px;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--input-bg);
+  color: var(--text-h);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px var(--input-ring);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #94a3b8;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-label);
 }

@@ -29,5 +29,6 @@
   "actions.save": "Зберегти",
   "actions.cancel": "Скасувати",
   "actions.languageSwitch": "Мова",
-  "form.save": "Зберегти рахунок"
+  "form.save": "Зберегти рахунок",
+  "pdf.template": "Шаблон"
 }

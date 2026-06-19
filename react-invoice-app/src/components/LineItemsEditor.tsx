@@ -139,6 +139,7 @@ export function LineItemsEditor() {
                             <td>
                                 <button
                                     type="button"
+                                    className={styles.removeButton}
                                     onClick={() => removeItem(item.id, Date.now())}
                                     disabled={items.length === 1}
                                     aria-label="Remove row">

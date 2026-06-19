@@ -29,5 +29,6 @@
   "actions.save": "Uložit",
   "actions.cancel": "Zrušit",
   "actions.languageSwitch": "Jazyk",
-  "form.save": "Uložit účet"
+  "form.save": "Uložit účet",
+  "pdf.template": "Šablona"
 }

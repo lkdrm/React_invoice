@@ -1,0 +1,26 @@
+.saveButton {
+    background-color: var(--accent, #aa3bff);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+
+    padding: 12px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(170, 59, 255, 0.25);
+}
+
+.saveButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(170, 59, 255, 0.35);
+    filter: brightness(1.05);
+}
+
+.saveButton:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(170, 59, 255, 0.25);
+}

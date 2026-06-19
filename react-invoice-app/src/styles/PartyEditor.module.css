@@ -1,7 +1,8 @@
 .party {
-  border: 1px solid #d8d8d8;
-  border-radius: 6px;
-  padding: 0.75rem 1rem 1rem;
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  background: #fafaf9;
 }
 
 .party legend {
@@ -12,17 +13,37 @@
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  font-size: 0.9rem;
-  margin-bottom: 0.6rem;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-label);
 }
 
 .field input,
+.field select,
 .field textarea {
-  font: inherit;
-  padding: 0.4rem 0.5rem;
-  border: 1px solid #c8c8c8;
-  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--input-bg);
+  color: var(--text-h);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px var(--input-ring);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #94a3b8;
 }
 
 .party {
@@ -42,4 +63,12 @@
 
 .field textarea {
   resize: vertical;
+}
+
+.party legend {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-h);
+  padding: 0 8px;
+  margin-bottom: 8px;
 }

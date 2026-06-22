@@ -30,5 +30,7 @@
   "actions.cancel": "Скасувати",
   "actions.languageSwitch": "Мова",
   "form.save": "Зберегти рахунок",
-  "pdf.template": "Шаблон"
+  "pdf.template": "Шаблон",
+  "save.button": "Зберегти як PDF...",
+  "save.inProgress": "Збереження..."
 }

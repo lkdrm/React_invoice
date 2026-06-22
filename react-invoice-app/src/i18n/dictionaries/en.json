@@ -30,5 +30,7 @@
   "actions.cancel": "Cancel",
   "actions.languageSwitch": "Language",
   "form.save": "Save invoice",
-  "pdf.template": "Template"
+  "pdf.template": "Template",
+  "save.button": "Save as PDF...",
+  "save.inProgress": "Saving..."
 }

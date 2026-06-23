@@ -32,5 +32,12 @@
   "form.save": "Uložit účet",
   "pdf.template": "Šablona",
   "save.button": "Uložit jako PDF...",
-  "save.inProgress": "Ukládání..."
+  "save.inProgress": "Ukládání...",
+  "settings.yourCompany": "Vaše společnost",
+  "settings.defaults": "Výchozí nastavení",
+  "settings.defaultVatRate": "Výchozí sazba DPH %",
+  "settings.defaultTemplate": "Výchozí šablona",
+  "settings.numbering": "Číslování",
+  "settings.invoiceNumberPrefix": "Předpona čísla faktury",
+  "settings.saved": "Uloženo"
 }

@@ -70,9 +70,10 @@
   align-self: flex-end;
   min-width: 16rem;
   padding: 1rem 1.25rem;
-  border: 1px solid #d0d0d0;
+  border: 1px solid var(--card-border);
   border-radius: 6px;
-  background: #fafafa;
+  background: var(--surface-bg);
+  color: var(--text);
 }
 
 .totals>div {
@@ -81,10 +82,12 @@
 }
 
 .grand {
-  border-top: 1px solid #d0d0d0;
   margin-top: 0.5rem;
   padding-top: 0.5rem;
+  border-top: 1px solid var(--card-border);
+  color: var(--text-h);
   font-size: 1.05rem;
+  font-weight: 600;
 }
 
 .visuallyHidden {

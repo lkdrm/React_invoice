@@ -1,5 +1,5 @@
-import { newId } from './ids';
-import type { Invoice, LineItem, Party } from './types';
+import { newId } from './Ids';
+import type { Invoice, LineItem, Party, Settings } from './types';
 
 const emptyParty = (): Party => ({
     name: '',
@@ -13,12 +13,14 @@ const today = (): string => {
     const year = now.getFullYear();
     const month = String(now.getMonth() + 1).padStart(2, '0');
     const day = String(now.getDate()).padStart(2, '0');
+
     return `${year}-${month}-${day}`;
 };
 
 const addDays = (isoDate: string, days: number): string => {
     const date = new Date(isoDate);
     date.setDate(date.getDate() + days);
+
     return date.toISOString().slice(0, 10);
 };
 
@@ -30,20 +32,32 @@ export const emptyLineItem = (): LineItem => ({
     vatRate: 21,
 });
 
-export const emptyInvoice = (): Invoice => {
+export const emptyInvoice = (
+    settings?: Settings,
+    suggestedNumber?: string
+): Invoice => {
+    const now = Date.now();
     const issueDate = today();
+
     return {
         id: newId(),
-        number: '',
+        number: suggestedNumber ?? '',
         issueDate,
         dueDate: addDays(issueDate, 14),
-        supplier: emptyParty(),
+
+        supplier: settings
+            ? { ...settings.defaultSupplier }
+            : emptyParty(),
+
         customer: emptyParty(),
+
         items: [emptyLineItem()],
-        currency: 'CZK',
-        templateId: 'classic',
+
+        currency: settings?.defaultCurrency ?? 'CZK',
+        templateId: settings?.invoiceTemplateId ?? 'classic',
+
         note: '',
-        createAt: Date.now(),
-        updateAt: Date.now(),
+        createAt: now,
+        updateAt: now,
     };
 };

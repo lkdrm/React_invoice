@@ -32,5 +32,12 @@
   "form.save": "Зберегти рахунок",
   "pdf.template": "Шаблон",
   "save.button": "Зберегти як PDF...",
-  "save.inProgress": "Збереження..."
+  "save.inProgress": "Збереження...",
+  "settings.yourCompany": "Ваша компанія",
+  "settings.defaults": "За замовчуванням",
+  "settings.defaultVatRate": "ПДВ % за замовчуванням",
+  "settings.defaultTemplate": "Шаблон за замовчуванням",
+  "settings.numbering": "Нумерація",
+  "settings.invoiceNumberPrefix": "Префікс номера",
+  "settings.saved": "Збережено"
 }

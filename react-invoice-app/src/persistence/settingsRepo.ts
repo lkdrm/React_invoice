@@ -15,7 +15,8 @@ export function defaulSettings(): Settings {
         defaultCurrency: 'CZK',
         defaultVatRate: 21,
         invoiceTemplateId: 'classic',
-        invoiceNumberPrefix: '2026-'
+        invoiceNumberPrefix: '2026-',
+        theme: 'light'
     };
 }
 

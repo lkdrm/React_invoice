@@ -37,6 +37,7 @@ export function InvoiceProvider({ children, initialInvoice }: InvoiceProviderPro
     return <InvoiceContext.Provider value={value}>{children}</InvoiceContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useInvoice(): InvoiceContextValue {
     const context = useContext(InvoiceContext);
     if (context === null) {

@@ -32,5 +32,12 @@
   "form.save": "Save invoice",
   "pdf.template": "Template",
   "save.button": "Save as PDF...",
-  "save.inProgress": "Saving..."
+  "save.inProgress": "Saving...",
+  "settings.yourCompany": "Your company",
+  "settings.defaults": "Defaults",
+  "settings.defaultVatRate": "Default VAT %",
+  "settings.defaultTemplate": "Default template",
+  "settings.numbering": "Numbering",
+  "settings.invoiceNumberPrefix": "Invoice number prefix",
+  "settings.saved": "Saved"
 }

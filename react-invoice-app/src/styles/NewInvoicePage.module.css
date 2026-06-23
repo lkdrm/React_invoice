@@ -2,9 +2,10 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    min-height: 100%;
     padding: 32px 20px;
-    background-color: #f8fafc;
-    min-height: 100vh;
+    box-sizing: border-box;
+    background-color: var(--bg);
 }
 
 .editor {
@@ -32,22 +33,22 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: #ffffff;
-    color: var(--text-h, #111827);
-    border: 1px solid var(--input-border, #e2e8f0);
-    border-radius: 8px;
     padding: 8px 16px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background: var(--surface-bg);
+    color: var(--text-h);
+    box-shadow: var(--card-shadow);
+    cursor: pointer;
     font-size: 14px;
     font-weight: 600;
-    cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .previewTriggerBtn:hover {
-    border-color: var(--accent, #aa3bff);
-    color: var(--accent, #aa3bff);
-    box-shadow: 0 4px 6px rgba(170, 59, 255, 0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-bg);
 }
 
 .modalOverlay {

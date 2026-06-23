@@ -1,39 +1,26 @@
 import type { Party } from '../domain/types';
-import { useInvoice } from '../state/InvoiceContext';
 import { useTranslation } from '../i18n/useTranslation';
 import styles from '../styles/PartyEditor.module.css';
 
 interface PartyEditorProps {
-    readonly partyType: 'supplier' | 'customer';
+    readonly party: Party;
+    readonly onChange: (party: Party) => void;
+    readonly label?: string;
 }
 
-export function PartyEditor({ partyType }: PartyEditorProps) {
-    const { invoice, dispatch } = useInvoice();
+export function PartyEditor({ party, onChange, label }: PartyEditorProps) {
     const { t } = useTranslation();
 
-    const party = invoice[partyType];
-
     const update = (patch: Partial<Party>) => {
-        dispatch({
-            type: 'patch-invoice',
-            patch: {
-                [partyType]: {
-                    ...party,
-                    ...patch,
-                },
-                updateAt: Date.now(),
-            },
+        onChange({
+            ...party,
+            ...patch,
         });
     };
 
-    const label =
-        partyType === 'supplier'
-            ? t('invoice.supplier')
-            : t('invoice.customer');
-
     return (
         <fieldset className={styles.party}>
-            <legend>{label}</legend>
+            {label && <legend>{label}</legend>}
 
             <label className={styles.field}>
                 <span>{t('party.name')}</span>

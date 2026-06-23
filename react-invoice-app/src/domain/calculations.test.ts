@@ -91,7 +91,7 @@ describe('calculations', () => {
     });
 
     it('formats UAH amounts for Ukrainian locale', () => {
-      const formatted = formatMoney(123456, 'UAH', 'uk');
+      const formatted = formatMoney(123456, 'UAH', 'ua');
 
       expect(formatted).toContain('1');
       expect(formatted).toContain('234');

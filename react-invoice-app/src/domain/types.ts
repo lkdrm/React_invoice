@@ -2,6 +2,7 @@ export type Locale = 'en' | 'ua' | 'cz';
 export type Money = number;
 export type ISODate = string; // ISO 8601 format: YYYY-MM-DD
 export type Currency = 'USD' | 'EUR' | 'UAH' | 'CZK';
+export type Theme = 'light' | 'dark';
 
 export interface Party {
     name: string;
@@ -40,4 +41,5 @@ export interface Settings {
     defaultVatRate: number; // Default VAT rate as a percentage, e.g., 20 for 20%
     invoiceTemplateId: string;
     invoiceNumberPrefix: string;
+    theme: Theme;
 }

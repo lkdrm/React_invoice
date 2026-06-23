@@ -1,4 +1,4 @@
-import type { Invoice } from '../domain/types';
+import type { Invoice, Party } from '../domain/types';
 import type { SyntheticEvent } from 'react';
 import { useInvoice } from '../state/InvoiceContext';
 import { useTranslation } from '../i18n/useTranslation';
@@ -25,8 +25,27 @@ export function InvoiceForm() {
 
     const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
         event.preventDefault();
-
         console.log('Submit invoice:', invoice);
+    };
+
+    const handleSupplierChange = (updatedParty: Party) => {
+        dispatch({
+            type: 'patch-invoice',
+            patch: {
+                supplier: updatedParty,
+                updateAt: Date.now(),
+            },
+        });
+    };
+
+    const handleCustomerChange = (updatedParty: Party) => {
+        dispatch({
+            type: 'patch-invoice',
+            patch: {
+                customer: updatedParty,
+                updateAt: Date.now(),
+            },
+        });
     };
 
     const sub = subTotal(invoice.items);
@@ -93,8 +112,16 @@ export function InvoiceForm() {
                 <h2>{t('invoice.parties')}</h2>
 
                 <div className={styles.parties}>
-                    <PartyEditor partyType="supplier" />
-                    <PartyEditor partyType="customer" />
+                    <PartyEditor
+                        party={invoice.supplier}
+                        onChange={handleSupplierChange}
+                        label={t('invoice.supplier')}
+                    />
+                    <PartyEditor
+                        party={invoice.customer}
+                        onChange={handleCustomerChange}
+                        label={t('invoice.customer')}
+                    />
                 </div>
             </section>
 

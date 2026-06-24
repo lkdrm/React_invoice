@@ -68,7 +68,9 @@ export const App = () => {
 
       <main className={styles.main}>
         {currentPage === 'new-invoice' ? <NewInvoicePage /> : null}
-        {currentPage === 'history' ? <HistoryPage /> : null}
+        {currentPage === 'history' ? (
+          <HistoryPage onNavigate={setCurrentPage} />
+        ) : null}
         {currentPage === 'settings' ? <SettingsPage /> : null}
       </main>
     </div>

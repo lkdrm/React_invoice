@@ -39,5 +39,15 @@
   "settings.defaultTemplate": "Výchozí šablona",
   "settings.numbering": "Číslování",
   "settings.invoiceNumberPrefix": "Předpona čísla faktury",
-  "settings.saved": "Uloženo"
+  "settings.saved": "Uloženo",
+  "history.title": "Historie faktur",
+  "history.empty": "Zatím jste neuložili žádnou fakturu.",
+  "history.noMatches": "Žádná faktura neodpovídá vyhledávání.",
+  "history.searchPlaceholder": "Hledat podle čísla nebo zákazníka",
+  "history.unnamedCustomer": "(bez zákazníka)",
+  "history.deleteConfirm": "Smazat tuto fakturu? Tuto akci nelze vrátit zpět.",
+  "history.actions.open": "Otevřít",
+  "history.actions.duplicate": "Duplikovat",
+  "history.actions.delete": "Smazat",
+  "history.unnamedInvoice": "(bez čísla)"
 }

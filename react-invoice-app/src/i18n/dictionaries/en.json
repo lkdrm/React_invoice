@@ -39,5 +39,15 @@
   "settings.defaultTemplate": "Default template",
   "settings.numbering": "Numbering",
   "settings.invoiceNumberPrefix": "Invoice number prefix",
-  "settings.saved": "Saved"
+  "settings.saved": "Saved",
+  "history.title": "Invoice history",
+  "history.empty": "You have not saved any invoices yet.",
+  "history.noMatches": "No invoices match your search.",
+  "history.searchPlaceholder": "Search by number or customer",
+  "history.unnamedCustomer": "(no customer)",
+  "history.deleteConfirm": "Delete this invoice? This cannot be undone.",
+  "history.actions.open": "Open",
+  "history.actions.duplicate": "Duplicate",
+  "history.actions.delete": "Delete",
+  "history.unnamedInvoice": "(без номера)"
 }

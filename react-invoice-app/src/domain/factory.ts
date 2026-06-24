@@ -1,4 +1,4 @@
-import { newId } from './Ids';
+import { newId } from './ids';
 import type { Invoice, LineItem, Party, Settings } from './types';
 
 const emptyParty = (): Party => ({

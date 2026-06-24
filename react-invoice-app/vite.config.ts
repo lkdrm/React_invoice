@@ -1,12 +1,12 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vitest/config'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
 export default defineConfig({
+  base: "/React_invoice/",
   plugins: [react()],
   test: {
     globals: false,
-    environment: 'node',
+    environment: "node",
   },
 });

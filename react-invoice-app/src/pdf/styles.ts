@@ -49,16 +49,20 @@ export const styles = StyleSheet.create({
     },
     datesRow: {
         flexDirection: 'row',
-        gap: 24,
         marginBottom: 18,
     },
     dateBlock: {
         flexDirection: 'column',
+        flex: 1,
+        minWidth: 0,
+        paddingRight: 10,
     },
     dateLabel: {
-        fontSize: 9,
+        fontSize: 8,
         color: '#888',
         textTransform: 'uppercase',
+        lineHeight: 1.25,
+        minHeight: 20
     },
     dateValue: {
         fontSize: 11,
@@ -75,7 +79,7 @@ export const styles = StyleSheet.create({
         paddingBottom: 4,
         marginBottom: 4,
         fontWeight: 'bold',
-        fontSize: 9,
+        fontSize: 7.5,
         textTransform: 'uppercase',
     },
     tableRow: {

@@ -39,5 +39,15 @@
   "settings.defaultTemplate": "Шаблон за замовчуванням",
   "settings.numbering": "Нумерація",
   "settings.invoiceNumberPrefix": "Префікс номера",
-  "settings.saved": "Збережено"
+  "settings.saved": "Збережено",
+  "history.title": "Історія рахунків",
+  "history.empty": "Ви ще не зберегли жодного рахунку.",
+  "history.noMatches": "Жоден рахунок не відповідає пошуку.",
+  "history.searchPlaceholder": "Пошук за номером або клієнтом",
+  "history.unnamedCustomer": "(без клієнта)",
+  "history.deleteConfirm": "Видалити цей рахунок? Це не можна скасувати.",
+  "history.actions.open": "Відкрити",
+  "history.actions.duplicate": "Дублювати",
+  "history.actions.delete": "Видалити",
+  "history.unnamedInvoice": "(без номера)"
 }

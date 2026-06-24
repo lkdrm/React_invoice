@@ -49,8 +49,8 @@ export function InvoiceForm() {
     };
 
     const sub = subTotal(invoice.items);
-    const vat = totalVat(invoice.items);
-    const grand = total(invoice.items);
+    const vat = totalVat(invoice.items, invoice.vatMode);
+    const grand = total(invoice.items, invoice.vatMode);
 
     return (
         <form className={styles.form} onSubmit={handleSubmit} noValidate={false}>
@@ -105,6 +105,39 @@ export function InvoiceForm() {
                             required
                         />
                     </label>
+
+                    <label className={styles.field}>
+                        <span>{t('invoice.taxableSupplyDate')}</span>
+                        <input
+                            type="date"
+                            value={invoice.taxableSupplyDate}
+                            onChange={(event) =>
+                                update({ taxableSupplyDate: event.target.value })
+                            }
+                            required
+                        />
+                    </label>
+
+                    <label className={styles.field}>
+                        <span>{t('invoice.vatMode')}</span>
+
+                        <select
+                            value={invoice.vatMode}
+                            onChange={(event) =>
+                                update({
+                                    vatMode: event.target.value as Invoice['vatMode'],
+                                })
+                            }
+                        >
+                            <option value="with-vat">
+                                {t('invoice.vatMode.withVat')}
+                            </option>
+
+                            <option value="without-vat">
+                                {t('invoice.vatMode.withoutVat')}
+                            </option>
+                        </select>
+                    </label>
                 </div>
             </section>
 
@@ -151,10 +184,12 @@ export function InvoiceForm() {
                     <strong>{formatMoney(sub, invoice.currency, locale)}</strong>
                 </div>
 
-                <div>
-                    <span>{t('invoice.totals.vat')}</span>
-                    <strong>{formatMoney(vat, invoice.currency, locale)}</strong>
-                </div>
+                {invoice.vatMode === 'with-vat' && (
+                    <div>
+                        <span>{t('invoice.totals.vat')}</span>
+                        <strong>{formatMoney(vat, invoice.currency, locale)}</strong>
+                    </div>
+                )}
 
                 <div className={styles.grand}>
                     <span>{t('invoice.total')}</span>

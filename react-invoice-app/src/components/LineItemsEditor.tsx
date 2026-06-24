@@ -5,6 +5,7 @@ import { formatMoney } from '../domain/formatMoney';
 import { parseMoneyInput, formatMoneyInput } from '../domain/money';
 import { emptyLineItem } from '../domain/factory';
 import { useTranslation } from '../i18n/useTranslation';
+import { useSettings } from '../state/useSettings';
 import styles from '../styles/LineItemsEditor.module.css';
 
 const VAT_OPTIONS = [0, 10, 15, 21] as const;
@@ -12,9 +13,11 @@ const VAT_OPTIONS = [0, 10, 15, 21] as const;
 export function LineItemsEditor() {
     const { invoice, dispatch } = useInvoice();
     const { t, locale } = useTranslation();
-
+    const { settings } = useSettings();
     const items = invoice.items;
     const currency = invoice.currency;
+
+    const isVatEnabled = invoice.vatMode === 'with-vat';
 
     const updateItems = (nextItems: LineItem[], updateAt: number) => {
         dispatch({
@@ -38,7 +41,13 @@ export function LineItemsEditor() {
     };
 
     const addItem = (updateAt: number) => {
-        updateItems([...items, emptyLineItem()], updateAt);
+        updateItems(
+            [
+                ...items,
+                emptyLineItem(settings.defaultVatRate ?? 21),
+            ],
+            updateAt
+        );
     };
 
     const removeItem = (id: string, updateAt: number) => {
@@ -47,6 +56,8 @@ export function LineItemsEditor() {
             updateAt
         );
     };
+
+
     return (
         <div className={styles.editor}>
             <table className={styles.table}>
@@ -55,7 +66,12 @@ export function LineItemsEditor() {
                         <th>{t('lineItem.description')}</th>
                         <th>{t('lineItem.quantity')}</th>
                         <th>{t('lineItem.unitPrice')}</th>
-                        <th>{t('lineItem.vatRate')}</th>
+
+                        {isVatEnabled && (
+                            <th>{t('lineItem.vatRate')}</th>
+                        )}
+
+                        <th>{t('lineItem.total')}</th>
                         <th aria-label="Actions" />
                     </tr>
                 </thead>
@@ -114,23 +130,26 @@ export function LineItemsEditor() {
                                 />
                             </td>
 
-                            <td>
-                                <select
-                                    value={item.vatRate}
-                                    onChange={(event) =>
-                                        updateItem(
-                                            item.id,
-                                            { vatRate: Number(event.target.value) },
-                                            Date.now()
-                                        )
-                                    }>
-                                    {VAT_OPTIONS.map((rate) => (
-                                        <option key={rate} value={rate}>
-                                            {rate}
-                                        </option>
-                                    ))}
-                                </select>
-                            </td>
+                            {isVatEnabled && (
+                                <td>
+                                    <select
+                                        value={item.vatRate}
+                                        onChange={(event) =>
+                                            updateItem(
+                                                item.id,
+                                                { vatRate: Number(event.target.value) },
+                                                Date.now()
+                                            )
+                                        }
+                                    >
+                                        {VAT_OPTIONS.map((rate) => (
+                                            <option key={rate} value={rate}>
+                                                {rate} %
+                                            </option>
+                                        ))}
+                                    </select>
+                                </td>
+                            )}
 
                             <td className={styles.lineTotal}>
                                 {formatMoney(lineTotal(item), currency, locale)}

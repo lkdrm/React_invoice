@@ -24,12 +24,14 @@ const addDays = (isoDate: string, days: number): string => {
     return date.toISOString().slice(0, 10);
 };
 
-export const emptyLineItem = (): LineItem => ({
+export const emptyLineItem = (
+    vatRate: number = 21,
+): LineItem => ({
     id: newId(),
     description: '',
     quantity: 1,
     unitPrice: 0,
-    vatRate: 21,
+    vatRate,
 });
 
 export const emptyInvoice = (
@@ -51,7 +53,9 @@ export const emptyInvoice = (
 
         customer: emptyParty(),
 
-        items: [emptyLineItem()],
+        items: [
+            emptyLineItem(settings?.defaultVatRate ?? 21),
+        ],
 
         currency: settings?.defaultCurrency ?? 'CZK',
         templateId: settings?.invoiceTemplateId ?? 'classic',
@@ -59,5 +63,8 @@ export const emptyInvoice = (
         note: '',
         createAt: now,
         updateAt: now,
+
+        taxableSupplyDate: issueDate,
+        vatMode: 'with-vat',
     };
 };

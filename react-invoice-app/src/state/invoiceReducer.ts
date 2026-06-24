@@ -15,6 +15,8 @@ export function emptyInvoice(): Invoice {
         templateId: 'classic',
         createAt: now,
         updateAt: now,
+        vatMode: 'with-vat',
+        taxableSupplyDate: new Date().toISOString().slice(0, 10),
     };
 }
 

@@ -13,7 +13,7 @@ interface ClassicTemplateProps {
 }
 
 export const ClassicTemplate: FC<ClassicTemplateProps> = ({ invoice, t, locale }) => {
-    const breakDown = vatBreakdown(invoice.items);
+    const breakDown = vatBreakdown(invoice.items, invoice.vatMode);
     const fmt = (amount: number): string => formatMoney(amount, invoice.currency, locale);
 
     return (
@@ -58,6 +58,10 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({ invoice, t, locale }
                         <Text style={styles.dateLabel}>{t('invoice.dueDate')}</Text>
                         <Text style={styles.dateValue}>{invoice.dueDate}</Text>
                     </View>
+                    <View style={styles.dateBlock}>
+                        <Text style={styles.dateLabel}>{t('invoice.taxableSupplyDate')}</Text>
+                        <Text style={styles.dateValue}>{invoice.taxableSupplyDate}</Text>
+                    </View>
                 </View>
 
                 <View style={styles.table}>
@@ -65,7 +69,11 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({ invoice, t, locale }
                         <Text style={styles.colDescription}>{t('lineItem.description')}</Text>
                         <Text style={styles.colQty}>{t('lineItem.quantity')}</Text>
                         <Text style={styles.colUnit}>{t('lineItem.unitPrice')}</Text>
-                        <Text style={styles.colVat}>{t('lineItem.vatRate')}</Text>
+                        {invoice.vatMode === 'with-vat' && (
+                            <Text style={styles.colVat}>
+                                {t('lineItem.vatRate')}
+                            </Text>
+                        )}
                         <Text style={styles.colLineTotal}>{t('invoice.totals.total')}</Text>
                     </View>
                     {invoice.items.map((item) => (
@@ -73,7 +81,11 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({ invoice, t, locale }
                             <Text style={styles.colDescription}>{item.description}</Text>
                             <Text style={styles.colQty}>{item.quantity}</Text>
                             <Text style={styles.colUnit}>{fmt(item.unitPrice)}</Text>
-                            <Text style={styles.colVat}>{item.vatRate}%</Text>
+                            {invoice.vatMode === 'with-vat' && (
+                                <Text style={styles.colVat}>
+                                    {item.vatRate}%
+                                </Text>
+                            )}
                             <Text style={styles.colLineTotal}>{fmt(lineTotal(item))}</Text>
                         </View>
                     ))}
@@ -92,7 +104,10 @@ export const ClassicTemplate: FC<ClassicTemplateProps> = ({ invoice, t, locale }
                     ))}
                     <View style={styles.totalsRowFinal}>
                         <Text>{t('invoice.totals.total')}</Text>
-                        <Text>{fmt(total(invoice.items))}</Text>
+
+                        <Text>
+                            {fmt(total(invoice.items, invoice.vatMode))}
+                        </Text>
                     </View>
                 </View>
 

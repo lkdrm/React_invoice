@@ -49,5 +49,11 @@
   "history.actions.open": "Відкрити",
   "history.actions.duplicate": "Дублювати",
   "history.actions.delete": "Видалити",
-  "history.unnamedInvoice": "(без номера)"
+  "history.unnamedInvoice": "(без номера)",
+  "invoice.taxableSupplyDate": "Дата здійснення оподатковуваної операції",
+  "invoice.vatMode": "Режим ПДВ",
+  "invoice.vatMode.withVat": "З ПДВ",
+  "invoice.vatMode.withoutVat": "Без ПДВ",
+  "invoice.notVatPayer": "Не є платником ПДВ",
+  "lineItem.total": "Разом"
 }

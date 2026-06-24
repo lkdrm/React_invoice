@@ -164,3 +164,9 @@ textarea:focus {
   border-color: var(--input-border-focus);
   box-shadow: 0 0 0 3px var(--input-ring);
 }
+
+@media (max-width: 720px) {
+  #root {
+    border-inline: none;
+  }
+}

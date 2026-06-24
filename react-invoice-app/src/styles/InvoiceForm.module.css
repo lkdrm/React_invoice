@@ -231,3 +231,28 @@
     gap: 24px;
   }
 }
+
+@media (max-width: 720px) {
+  .section {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .grid,
+  .parties {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .totals {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    align-self: stretch;
+  }
+
+  .actions {
+    margin-top: 24px;
+    padding-top: 16px;
+  }
+}

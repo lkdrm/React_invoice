@@ -125,28 +125,37 @@
 }
 
 @media (max-width: 720px) {
-  .layout {
-    padding: 16px 12px 32px;
-  }
+    .modalOverlay {
+        align-items: stretch;
+        padding: 0;
+    }
 
-  .editor {
-    gap: 16px;
-  }
+    .modalContent {
+        width: 100%;
+        max-width: none;
+        height: 100svh;
+        border-radius: 0;
+    }
 
-  .topBar {
-    align-items: stretch;
-  }
+    .modalHeader {
+        gap: 10px;
+        padding: 12px;
+    }
 
-  .topActions {
-    width: 100%;
-  }
+    .modalTools {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+    }
 
-  .topActions > * {
-    flex: 1;
-  }
+    .closeBtn {
+        flex: 0 0 auto;
+        padding: 8px;
+        white-space: nowrap;
+    }
 
-  .previewTriggerBtn {
-    justify-content: center;
-    padding: 12px;
-  }
+    .modalBody {
+        min-height: 0;
+    }
+
 }

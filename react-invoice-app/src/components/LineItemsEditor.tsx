@@ -16,10 +16,9 @@ export function LineItemsEditor() {
     const { settings } = useSettings();
     const items = invoice.items;
     const currency = invoice.currency;
-
     const isVatEnabled = invoice.vatMode === 'with-vat';
 
-    const updateItems = (nextItems: LineItem[], updateAt: number) => {
+    const updateItems = (nextItems: LineItem[], updateAt: number): void => {
         dispatch({
             type: 'patch-invoice',
             patch: {
@@ -32,31 +31,32 @@ export function LineItemsEditor() {
     const updateItem = (
         id: string,
         patch: Partial<LineItem>,
-        updateAt: number
-    ) => {
+        updateAt: number,
+    ): void => {
         updateItems(
-            items.map((item) => item.id === id ? { ...item, ...patch } : item),
-            updateAt
+            items.map((item) =>
+                item.id === id ? { ...item, ...patch } : item,
+            ),
+            updateAt,
         );
     };
 
-    const addItem = (updateAt: number) => {
+    const addItem = (updateAt: number): void => {
         updateItems(
             [
                 ...items,
                 emptyLineItem(settings.defaultVatRate ?? 21),
             ],
-            updateAt
+            updateAt,
         );
     };
 
-    const removeItem = (id: string, updateAt: number) => {
+    const removeItem = (id: string, updateAt: number): void => {
         updateItems(
             items.filter((item) => item.id !== id),
-            updateAt
+            updateAt,
         );
     };
-
 
     return (
         <div className={styles.editor}>
@@ -67,9 +67,9 @@ export function LineItemsEditor() {
                         <th>{t('lineItem.quantity')}</th>
                         <th>{t('lineItem.unitPrice')}</th>
 
-                        {isVatEnabled && (
+                        {isVatEnabled ? (
                             <th>{t('lineItem.vatRate')}</th>
-                        )}
+                        ) : null}
 
                         <th>{t('lineItem.total')}</th>
                         <th aria-label="Actions" />
@@ -79,7 +79,10 @@ export function LineItemsEditor() {
                 <tbody>
                     {items.map((item) => (
                         <tr key={item.id}>
-                            <td>
+                            <td
+                                className={styles.descriptionCell}
+                                data-label={t('lineItem.description')}
+                            >
                                 <input
                                     type="text"
                                     value={item.description}
@@ -87,7 +90,7 @@ export function LineItemsEditor() {
                                         updateItem(
                                             item.id,
                                             { description: event.target.value },
-                                            Date.now()
+                                            Date.now(),
                                         )
                                     }
                                     required
@@ -95,7 +98,10 @@ export function LineItemsEditor() {
                                 />
                             </td>
 
-                            <td>
+                            <td
+                                className={styles.quantityCell}
+                                data-label={t('lineItem.quantity')}
+                            >
                                 <input
                                     type="number"
                                     min={0}
@@ -105,7 +111,7 @@ export function LineItemsEditor() {
                                         updateItem(
                                             item.id,
                                             { quantity: Number(event.target.value) },
-                                            Date.now()
+                                            Date.now(),
                                         )
                                     }
                                     required
@@ -113,7 +119,10 @@ export function LineItemsEditor() {
                                 />
                             </td>
 
-                            <td>
+                            <td
+                                className={styles.unitPriceCell}
+                                data-label={t('lineItem.unitPrice')}
+                            >
                                 <input
                                     type="text"
                                     inputMode="decimal"
@@ -121,8 +130,12 @@ export function LineItemsEditor() {
                                     onChange={(event) =>
                                         updateItem(
                                             item.id,
-                                            { unitPrice: parseMoneyInput(event.target.value) },
-                                            Date.now()
+                                            {
+                                                unitPrice: parseMoneyInput(
+                                                    event.target.value,
+                                                ),
+                                            },
+                                            Date.now(),
                                         )
                                     }
                                     required
@@ -130,15 +143,22 @@ export function LineItemsEditor() {
                                 />
                             </td>
 
-                            {isVatEnabled && (
-                                <td>
+                            {isVatEnabled ? (
+                                <td
+                                    className={styles.vatCell}
+                                    data-label={t('lineItem.vatRate')}
+                                >
                                     <select
                                         value={item.vatRate}
                                         onChange={(event) =>
                                             updateItem(
                                                 item.id,
-                                                { vatRate: Number(event.target.value) },
-                                                Date.now()
+                                                {
+                                                    vatRate: Number(
+                                                        event.target.value,
+                                                    ),
+                                                },
+                                                Date.now(),
                                             )
                                         }
                                     >
@@ -149,19 +169,29 @@ export function LineItemsEditor() {
                                         ))}
                                     </select>
                                 </td>
-                            )}
+                            ) : null}
 
-                            <td className={styles.lineTotal}>
-                                {formatMoney(lineTotal(item), currency, locale)}
+                            <td
+                                className={styles.lineTotal}
+                                data-label={t('lineItem.total')}
+                            >
+                                {formatMoney(
+                                    lineTotal(item),
+                                    currency,
+                                    locale,
+                                )}
                             </td>
 
-                            <td>
+                            <td className={styles.actionsCell}>
                                 <button
                                     type="button"
                                     className={styles.removeButton}
-                                    onClick={() => removeItem(item.id, Date.now())}
+                                    onClick={() =>
+                                        removeItem(item.id, Date.now())
+                                    }
                                     disabled={items.length === 1}
-                                    aria-label="Remove row">
+                                    aria-label="Remove row"
+                                >
                                     {t('lineItem.remove')}
                                 </button>
                             </td>
@@ -173,7 +203,8 @@ export function LineItemsEditor() {
             <button
                 type="button"
                 className={styles.addButton}
-                onClick={() => addItem(Date.now())}>
+                onClick={() => addItem(Date.now())}
+            >
                 {t('lineItem.add')}
             </button>
         </div>

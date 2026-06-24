@@ -7,20 +7,30 @@ import { InvoiceForm } from '../components/InvoiceForm';
 import { SaveButton } from '../components/SaveButton';
 import { PdfPreview } from '../pdf/PdfPreview';
 import { TemplatePicker } from '../pdf/TemplatePicker';
+import type { Invoice } from '../domain/types';
 import styles from '../styles/NewInvoicePage.module.css';
 
-export function NewInvoicePage() {
+interface NewInvoicePageProps {
+    readonly initialInvoice?: Invoice;
+}
+
+export function NewInvoicePage({
+    initialInvoice,
+}: NewInvoicePageProps) {
     const { settings } = useSettings();
 
-    const [initialInvoice] = useState(() =>
+
+    const [newInvoice] = useState(() =>
         emptyInvoice(
             settings,
-            nextInvoiceNumber(settings.invoiceNumberPrefix)
-        )
+            nextInvoiceNumber(settings.invoiceNumberPrefix),
+        ),
     );
 
+    const invoice = initialInvoice ?? newInvoice;
+
     return (
-        <InvoiceProvider initialInvoice={initialInvoice}>
+        <InvoiceProvider initialInvoice={invoice}>
             <NewInvoicePageContent />
         </InvoiceProvider>
     );

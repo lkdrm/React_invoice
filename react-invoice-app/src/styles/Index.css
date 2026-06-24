@@ -79,8 +79,7 @@
 }
 
 #root {
-  width: 100%;
-  max-width: 1126px;
+  width: min(1126px, 100%);
   min-height: 100svh;
   margin: 0 auto;
   display: flex;
@@ -88,6 +87,7 @@
   box-sizing: border-box;
   background: var(--bg);
   border-inline: 1px solid var(--border);
+  text-align: initial;
 }
 
 body {
@@ -167,6 +167,8 @@ textarea:focus {
 
 @media (max-width: 720px) {
   #root {
+    width: 100%;
+    max-width: none;
     border-inline: none;
   }
 }

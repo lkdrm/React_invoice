@@ -123,3 +123,30 @@
         transform: translateY(0);
     }
 }
+
+@media (max-width: 720px) {
+  .layout {
+    padding: 16px 12px 32px;
+  }
+
+  .editor {
+    gap: 16px;
+  }
+
+  .topBar {
+    align-items: stretch;
+  }
+
+  .topActions {
+    width: 100%;
+  }
+
+  .topActions > * {
+    flex: 1;
+  }
+
+  .previewTriggerBtn {
+    justify-content: center;
+    padding: 12px;
+  }
+}

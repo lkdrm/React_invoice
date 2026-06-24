@@ -49,5 +49,11 @@
   "history.actions.open": "Otevřít",
   "history.actions.duplicate": "Duplikovat",
   "history.actions.delete": "Smazat",
-  "history.unnamedInvoice": "(bez čísla)"
+  "history.unnamedInvoice": "(bez čísla)",
+  "invoice.taxableSupplyDate": "Datum uskutečnění zdanitelného plnění (DUZP)",
+  "invoice.vatMode": "Režim DPH",
+  "invoice.vatMode.withVat": "S DPH",
+  "invoice.vatMode.withoutVat": "Bez DPH",
+  "invoice.notVatPayer": "Nejsem plátce DPH",
+  "lineItem.total": "Celkem"
 }

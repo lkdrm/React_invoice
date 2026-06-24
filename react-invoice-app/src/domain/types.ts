@@ -3,6 +3,7 @@ export type Money = number;
 export type ISODate = string; // ISO 8601 format: YYYY-MM-DD
 export type Currency = 'USD' | 'EUR' | 'UAH' | 'CZK';
 export type Theme = 'light' | 'dark';
+export type VatMode = 'with-vat' | 'without-vat';
 
 export interface Party {
     name: string;
@@ -32,6 +33,8 @@ export interface Invoice {
     note?: string;
     createAt: number; // Unix timestamp
     updateAt: number; // Unix timestamp
+    taxableSupplyDate: ISODate;
+    vatMode: VatMode;
 }
 
 export interface Settings {

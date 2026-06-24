@@ -49,5 +49,11 @@
   "history.actions.open": "Open",
   "history.actions.duplicate": "Duplicate",
   "history.actions.delete": "Delete",
-  "history.unnamedInvoice": "(без номера)"
+  "history.unnamedInvoice": "(без номера)",
+  "invoice.taxableSupplyDate": "Taxable supply date",
+  "invoice.vatMode": "VAT mode",
+  "invoice.vatMode.withVat": "With VAT",
+  "invoice.vatMode.withoutVat": "Without VAT",
+  "invoice.notVatPayer": "Not a VAT payer",
+  "lineItem.total": "Total"
 }

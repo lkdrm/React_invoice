@@ -33,6 +33,16 @@ export function MinimalTemplate({ invoice, t, locale }: MinimalTemplateProps) {
                     </View>
 
                     <View style={styles.metaBlock}>
+                        <Text style={styles.metaLabel}>
+                            {t('invoice.taxableSupplyDate')}
+                        </Text>
+
+                        <Text style={styles.metaValue}>
+                            {invoice.taxableSupplyDate}
+                        </Text>
+                    </View>
+
+                    <View style={styles.metaBlock}>
                         <Text style={styles.metaLabel}>{t('invoice.currency')}</Text>
                         <Text style={styles.metaValue}>{invoice.currency}</Text>
                     </View>
@@ -100,16 +110,23 @@ export function MinimalTemplate({ invoice, t, locale }: MinimalTemplateProps) {
                         <Text>{fmt(subTotal(invoice.items))}</Text>
                     </View>
 
-                    <View style={styles.totalsRow}>
-                        <Text style={styles.totalsLabel}>
-                            {t('invoice.totals.vat')}
-                        </Text>
-                        <Text>{fmt(totalVat(invoice.items))}</Text>
-                    </View>
+                    {invoice.vatMode === 'with-vat' && (
+                        <View style={styles.totalsRow}>
+                            <Text style={styles.totalsLabel}>
+                                {t('invoice.totals.vat')}
+                            </Text>
+
+                            <Text>
+                                {fmt(totalVat(invoice.items, invoice.vatMode))}
+                            </Text>
+                        </View>
+                    )}
 
                     <View style={styles.grandTotal}>
                         <Text>{t('invoice.totals.total')}</Text>
-                        <Text>{fmt(total(invoice.items))}</Text>
+                        <Text>
+                            {fmt(total(invoice.items, invoice.vatMode))}
+                        </Text>
                     </View>
                 </View>
 

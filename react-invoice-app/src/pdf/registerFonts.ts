@@ -1,14 +1,16 @@
 import { Font } from '@react-pdf/renderer';
 
+const fontsBaseUrl = `${import.meta.env.BASE_URL}fonts/`;
+
 Font.register({
     family: 'Noto Sans',
     fonts: [
         {
-            src: '/fonts/NotoSans-Regular.ttf',
+            src: `${fontsBaseUrl}NotoSans-Regular.ttf`,
             fontWeight: 'normal',
         },
         {
-            src: '/fonts/NotoSans-Bold.ttf',
+            src: `${fontsBaseUrl}NotoSans-Bold.ttf`,
             fontWeight: 'bold',
         },
     ],

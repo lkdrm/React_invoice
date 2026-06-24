@@ -11,6 +11,7 @@ interface SettingsFormProps {
 }
 
 const CURRENCIES: Currency[] = ['CZK', 'EUR', 'UAH', 'USD'];
+const VAT_OPTIONS = [0, 10, 15, 21] as const;
 
 export const SettingsForm: FC<SettingsFormProps> = ({ settings, onChange }) => {
     const { t, locale } = useTranslation();
@@ -42,14 +43,21 @@ export const SettingsForm: FC<SettingsFormProps> = ({ settings, onChange }) => {
 
                 <label className={styles.field}>
                     <span>{t('settings.defaultVatRate')}</span>
-                    <input
-                        type="number"
-                        min={0}
-                        max={100}
-                        step={1}
+
+                    <select
                         value={settings.defaultVatRate}
-                        onChange={(event) => onChange({ defaultVatRate: Number(event.target.value) })}
-                    />
+                        onChange={(event) =>
+                            onChange({
+                                defaultVatRate: Number(event.target.value),
+                            })
+                        }
+                    >
+                        {VAT_OPTIONS.map((rate) => (
+                            <option key={rate} value={rate}>
+                                {rate} %
+                            </option>
+                        ))}
+                    </select>
                 </label>
 
                 <label className={styles.field}>

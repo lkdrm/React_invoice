@@ -125,6 +125,10 @@
 }
 
 @media (max-width: 720px) {
+    .layout {
+        padding: 10px 0 28px;
+    }
+
     .modalOverlay {
         align-items: stretch;
         padding: 0;
@@ -156,6 +160,14 @@
 
     .modalBody {
         min-height: 0;
+    }
+
+    .editor {
+        gap: 14px;
+    }
+
+    .topActions {
+        gap: 10px;
     }
 
 }

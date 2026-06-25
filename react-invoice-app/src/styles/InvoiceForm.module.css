@@ -228,36 +228,33 @@
 }
 
 @media (max-width: 720px) {
-  .form {
-    width: 100%;
-  }
 
-  .section {
-    padding: 1rem;
-    border-radius: 14px;
-  }
-
+  .form,
   .grid,
-  .parties {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
+  .parties,
   .field,
-  .party,
-  .totals {
-    text-align: left;
-  }
-
-  .totals {
-    width: 100%;
+  .party {
     min-width: 0;
-    box-sizing: border-box;
-    align-self: stretch;
   }
 
-  .actions {
-    margin-top: 24px;
-    padding-top: 16px;
+  .field input,
+  .field select,
+  .field textarea {
+    min-width: 0;
+    max-width: 100%;
+    font-size: 16px;
+  }
+
+  .field input,
+  .field select {
+    min-height: 48px;
+  }
+
+  .field textarea {
+    min-height: 104px;
+  }
+
+  .section h2 {
+    margin-bottom: 1rem;
   }
 }

@@ -47,21 +47,17 @@ async function saveViaFilePicker(blob: Blob, suggestedName: string, showSaveFile
 function saveViaDownloadLink(blob: Blob, suggestedName: string): void {
     const objectUrl = URL.createObjectURL(blob);
 
-    const isMobile =
-        /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    if (isMobile) {
-        window.open(objectUrl, '_blank');
-        setTimeout(() => URL.revokeObjectURL(objectUrl), 60_000);
-        return;
-    }
-
     const anchor = document.createElement('a');
     anchor.href = objectUrl;
     anchor.download = suggestedName;
+    anchor.target = '_blank';
+    anchor.rel = 'noreferrer';
+
     document.body.appendChild(anchor);
     anchor.click();
     document.body.removeChild(anchor);
 
-    URL.revokeObjectURL(objectUrl);
+    setTimeout(() => {
+        URL.revokeObjectURL(objectUrl);
+    }, 60_000);
 }

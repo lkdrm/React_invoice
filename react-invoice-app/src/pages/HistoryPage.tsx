@@ -2,16 +2,17 @@ import { useMemo, useState } from 'react';
 import type { Invoice } from '../domain/types';
 import { invoiceRepo } from '../persistence/invoiceRepo';
 import { useTranslation } from '../i18n/useTranslation';
+import { nextInvoiceNumber } from '../domain/numbering';
+import { useSettings } from '../state/useSettings';
 import styles from '../styles/HistoryPage.module.css';
 
-type Page = 'new-invoice' | 'history' | 'settings';
-
 interface HistoryPageProps {
-    onNavigate: (page: Page) => void;
+    onOpenInvoice: (invoice: Invoice) => void;
 }
 
-export function HistoryPage({ onNavigate }: HistoryPageProps) {
+export function HistoryPage({ onOpenInvoice, }: HistoryPageProps) {
     const { t } = useTranslation();
+    const { settings } = useSettings();
 
     const [invoices, setInvoices] = useState<Invoice[]>(() => invoiceRepo.list());
     const [search, setSearch] = useState('');
@@ -38,31 +39,23 @@ export function HistoryPage({ onNavigate }: HistoryPageProps) {
         });
     }, [invoices, search]);
 
-    const handleOpen = (invoice: Invoice) => {
-        console.log('Open invoice:', invoice);
-        onNavigate('new-invoice');
+    const handleOpen = (invoice: Invoice): void => {
+        onOpenInvoice(invoice);
     };
 
-    const handleDuplicate = (invoice: Invoice) => {
+    const handleDuplicate = (invoice: Invoice): void => {
         const now = Date.now();
-
         const duplicate: Invoice = {
             ...invoice,
             id: crypto.randomUUID(),
-
-            number: nextInvoiceNumber('INV-'),
-
+            number: nextInvoiceNumber(settings.invoiceNumberPrefix),
             supplier: { ...invoice.supplier },
             customer: { ...invoice.customer },
             items: invoice.items.map((item) => ({ ...item })),
-
             createAt: now,
             updateAt: now,
         };
-
-        invoiceRepo.save(duplicate);
-        reload();
-        onNavigate('new-invoice');
+        onOpenInvoice(duplicate);
     };
 
     const handleDelete = (invoiceId: string) => {
@@ -144,11 +137,4 @@ export function HistoryPage({ onNavigate }: HistoryPageProps) {
             )}
         </section>
     );
-}
-
-function nextInvoiceNumber(prefix: string): string {
-    const count = invoiceRepo.list().length + 1;
-    const padded = count.toString().padStart(3, '0');
-
-    return `${prefix}${padded}`;
 }

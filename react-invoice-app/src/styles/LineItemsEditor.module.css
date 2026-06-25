@@ -1,7 +1,9 @@
 .editor {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .table {
@@ -13,47 +15,87 @@
 .table td {
   padding: 0.75rem 0.5rem;
   vertical-align: middle;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--card-border);
 }
 
 .table th {
+  padding: 0.75rem 0.5rem;
+  border-bottom: 2px solid var(--card-border);
+  background: transparent;
+  color: var(--text-label);
   font-size: 0.75rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--text-label);
-  background: transparent;
-  border-bottom: 2px solid var(--card-border);
-  padding: 0.75rem 0.5rem;
+  text-transform: uppercase;
 }
 
 .table input,
 .table select {
   width: 100%;
-  font: inherit;
-  padding: 0.35rem 0.4rem;
-  border: 1px solid #c8c8c8;
-  border-radius: 4px;
+  min-width: 0;
   box-sizing: border-box;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  outline: none;
+  background: var(--input-bg);
+  color: var(--text-h);
+  font: inherit;
+  padding: 10px 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.table input:focus,
+.table select:focus {
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px var(--input-ring);
+}
+
+.table input::placeholder {
+  color: #94a3b8;
+}
+
+.descriptionCell {
+  width: 34%;
+}
+
+.quantityCell {
+  width: 13%;
+}
+
+.unitPriceCell {
+  width: 16%;
+}
+
+.vatCell {
+  width: 12%;
 }
 
 .lineTotal {
+  width: 16%;
+  color: var(--text-h);
+  font-weight: 600;
   text-align: right;
+  white-space: nowrap;
+}
+
+.actionsCell {
+  width: 1%;
   white-space: nowrap;
 }
 
 .addButton {
   align-self: flex-start;
+  min-height: 42px;
   padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
   border: none;
+  border-radius: 8px;
   background: var(--accent);
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(170, 59, 255, 0.2);
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .addButton:hover {
@@ -63,20 +105,21 @@
 }
 
 .removeButton {
-  background-color: transparent;
-  color: #ef4444;
+  min-height: 38px;
+  padding: 6px 12px;
   border: 1px solid transparent;
   border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 13px;
-  font-weight: 500;
+  background: transparent;
+  color: #ef4444;
   cursor: pointer;
-  transition: all 0.2s ease;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.removeButton:hover {
-  background-color: #fef2f2;
+.removeButton:hover:not(:disabled) {
   border-color: #fca5a5;
+  background-color: #fef2f2;
   color: #dc2626;
 }
 
@@ -85,38 +128,115 @@
   outline-offset: 2px;
 }
 
-.field input,
-.field select,
-.field textarea {
-  width: 100%;
-  box-sizing: border-box;
-  background: var(--input-bg);
-  color: var(--text-h);
-  border: 1px solid var(--input-border);
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 14px;
-  transition: all 0.2s ease-in-out;
-  outline: none;
+.removeButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
 }
 
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  border-color: var(--input-border-focus);
-  box-shadow: 0 0 0 3px var(--input-ring);
+@media (max-width: 720px) {
+
+  .table,
+  .table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tbody {
+    display: grid;
+    gap: 14px;
+  }
+
+  .table tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    background: var(--surface-bg);
+    box-shadow: var(--card-shadow);
+  }
+
+  .table td {
+    min-width: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .table td[data-label]::before {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text-label);
+    content: attr(data-label);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .descriptionCell {
+    grid-column: 1 / -1;
+    width: auto;
+  }
+
+  .quantityCell,
+  .unitPriceCell {
+    grid-column: span 1;
+    width: auto;
+  }
+
+  .vatCell {
+    grid-column: 1 / -1;
+    width: 50%;
+  }
+
+  .lineTotal {
+    display: flex;
+    grid-column: 1 / -1;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--bg);
+    text-align: right;
+  }
+
+  .lineTotal::before {
+    margin-bottom: 0 !important;
+  }
+
+  .actionsCell {
+    grid-column: 1 / -1;
+    width: auto;
+    padding-top: 2px !important;
+  }
+
+  .removeButton {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .addButton {
+    width: 100%;
+    min-height: 46px;
+    justify-content: center;
+  }
+
+
 }
 
-.field input::placeholder,
-.field textarea::placeholder {
-  color: #94a3b8;
-}
+@media (max-width: 380px) {
+  .table tr {
+    grid-template-columns: 1fr;
+  }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-label);
+  .quantityCell,
+  .unitPriceCell,
+  .vatCell {
+    grid-column: 1 / -1;
+    width: auto;
+  }
 }

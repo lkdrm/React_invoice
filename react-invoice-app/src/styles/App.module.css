@@ -1,52 +1,213 @@
 .app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 24px;
-  border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 68px;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-bg);
 }
 
-.header h1 {
-  margin: 0 16px 0 0;
-  font-size: 18px;
+.brand {
+    margin: 0 16px 0 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--text-h);
+    cursor: pointer;
+    font: inherit;
+    font-size: 18px;
+    font-weight: 700;
 }
 
-.nav {
-  display: flex;
-  flex: 1;
-  gap: 8px;
+.desktopNav {
+    display: flex;
+    flex: 1;
+    gap: 8px;
 }
 
-.nav button {
-  padding: 6px 12px;
-  border: 1px solid transparent;
-  border-radius: 6px;
-  background: transparent;
-  cursor: pointer;
-  font-size: 14px;
+.desktopNav button,
+.mobileNav button {
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
-.nav button:hover {
-  background: #f4f4f4;
+.desktopNav button {
+    padding: 8px 12px;
 }
 
-.nav button.active {
-  background: #1a1a1a;
-  color: #fff;
+.desktopNav button:hover,
+.mobileNav button:hover {
+    background: var(--surface-hover);
+}
+
+.desktopNav button.active,
+.mobileNav button.active {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+.desktopTools {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menuButton {
+    display: none;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 10px;
+    background: var(--surface-bg);
+    cursor: pointer;
+    color: var(--text-h);
+}
+
+.menuIcon {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
 }
 
 .main {
-  flex: 1;
-  min-height: 0;
-  padding: 24px;
-  background: var(--bg);
+    flex: 1;
+    min-height: 0;
+    padding: 24px;
+    background: var(--bg);
+}
+
+.menuBackdrop,
+.mobileMenu {
+    display: none;
+}
+
+@media (max-width: 720px) {
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        min-height: 60px;
+        padding: 10px 16px;
+    }
+
+    .brand {
+        margin-right: auto;
+        font-size: 19px;
+    }
+
+    .desktopNav,
+    .desktopTools {
+        display: none;
+    }
+
+    .menuButton {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main {
+        padding: 16px 12px 32px;
+    }
+
+    .menuBackdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: block;
+        padding: 0;
+        border: none;
+        background: rgba(17, 24, 39, 0.45);
+        cursor: default;
+    }
+
+    .mobileMenu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 60;
+        display: flex;
+        width: min(320px, 86vw);
+        flex-direction: column;
+        padding: 20px;
+        box-sizing: border-box;
+        background: var(--surface-bg);
+        box-shadow: -14px 0 36px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobileMenuHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--border);
+        color: var(--text-h);
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .closeMenuButton {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border: none;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--text-h);
+        cursor: pointer;
+        font-size: 30px;
+        line-height: 1;
+    }
+
+    .closeMenuButton:hover {
+        background: var(--surface-hover);
+    }
+
+    .mobileNav {
+        display: grid;
+        gap: 8px;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .mobileNav button {
+        width: 100%;
+        padding: 12px 14px;
+        text-align: left;
+        font-size: 16px;
+    }
+
+    .mobileTools {
+        display: grid;
+        gap: 12px;
+        padding-top: 20px;
+    }
+
+    .mobileTools>* {
+        width: 100%;
+    }
+
+    .mobileTools :global(button) {
+        width: 100%;
+        justify-content: space-between;
+    }
 }

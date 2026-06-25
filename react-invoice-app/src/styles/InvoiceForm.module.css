@@ -46,7 +46,7 @@
   border: 1px solid var(--input-border);
   border-radius: 8px;
   padding: 10px 14px;
-  font-size: 14px;
+  font-size: 16px;
   transition: all 0.2s ease-in-out;
   outline: none;
 }
@@ -243,6 +243,7 @@
     min-width: 0;
     max-width: 100%;
     font-size: 16px;
+    min-height: 48px;
   }
 
   .field input,

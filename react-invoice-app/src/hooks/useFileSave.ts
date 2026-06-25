@@ -16,7 +16,7 @@ export function useFileSave(): FileSaveApi {
             await saveViaFilePicker(blob, suggestedName, showSaveFilePicker);
             return;
         }
-        saveViaDownloadLink(blob, suggestedName);
+        await saveViaDownloadLink(blob, suggestedName);
     }, []);
 
     return { savePdf };
@@ -44,15 +44,22 @@ async function saveViaFilePicker(blob: Blob, suggestedName: string, showSaveFile
     }
 }
 
-function saveViaDownloadLink(blob: Blob, suggestedName: string): void {
+async function saveViaDownloadLink(blob: Blob, suggestedName: string): Promise<void> {
+    const file = new File([blob], suggestedName, { type: blob.type });
+
+    if (navigator.canShare?.({ files: [file] })) {
+        await navigator.share({
+            files: [file],
+            title: suggestedName,
+        });
+        return;
+    }
+
     const objectUrl = URL.createObjectURL(blob);
 
     const anchor = document.createElement('a');
     anchor.href = objectUrl;
     anchor.download = suggestedName;
-    anchor.target = '_blank';
-    anchor.rel = 'noreferrer';
-
     document.body.appendChild(anchor);
     anchor.click();
     document.body.removeChild(anchor);

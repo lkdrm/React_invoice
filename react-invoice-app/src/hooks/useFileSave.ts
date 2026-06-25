@@ -47,7 +47,8 @@ async function saveViaFilePicker(blob: Blob, suggestedName: string, showSaveFile
 function saveViaDownloadLink(blob: Blob, suggestedName: string): void {
     const objectUrl = URL.createObjectURL(blob);
 
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const isMobile =
+        /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isMobile) {
         window.open(objectUrl, '_blank');
